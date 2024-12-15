@@ -4,33 +4,33 @@ import logo from "./goapolice.png";
 
 const PoliceHelpDesk = () => {
   const [isBotOpen, setIsBotOpen] = useState(false);
-  const [headingText, setHeadingText] = useState("AnswerPol");
-  const [fade, setFade] = useState(true); // State for fading effect
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
-  // Text array to cycle through
-  const textArray = ["AnswerPol", "#hereforyou", "#youarepriority"];
-  let currentIndex = 0;
+  // Array of text pairs (first part white, second part blue)
+  const textArray = [
+    { white: "Answer", blue: "Pol" },
+    { white: "#herefor", blue: "you" },
+    { white: "#youare", blue: "priority" },
+  ];
 
-  // Function to switch between the texts with fade effect
+  // Function to switch text with fade effect
   const switchText = () => {
-    setFade(false); // Start fade-out effect
+    setFade(false); // Start fade-out
     setTimeout(() => {
-      currentIndex = (currentIndex + 1) % textArray.length;
-      setHeadingText(textArray[currentIndex]);
-      setFade(true); // Start fade-in effect
-    }, 500); // Wait for 500ms (duration of fade-out) before changing the text
+      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % textArray.length);
+      setFade(true); // Start fade-in
+    }, 500);
   };
 
   useEffect(() => {
-    // Automatically switch text every 3 seconds
-    const interval = setInterval(switchText, 3000);
-
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    const interval = setInterval(switchText, 3000); // Switch text every 3 seconds
+    return () => clearInterval(interval);
   }, []);
 
-  const openChatBot = () => {
-    setIsBotOpen(!isBotOpen); // Toggle chatbot visibility
-  };
+  const openChatBot = () => setIsBotOpen(!isBotOpen);
+
+  const currentText = textArray[currentTextIndex]; // Current text pair
 
   return (
     <div className="page-container">
@@ -38,9 +38,11 @@ const PoliceHelpDesk = () => {
         <img src={logo} alt="Goa Police Logo" className="logo" />
       </div>
 
+      {/* Dynamic Heading */}
       <h1 className="title">
-        <span className={`highlight ${fade ? "fade-in" : "fade-out"}`}>
-          {headingText}
+        <span className={`fade ${fade ? "fade-in" : "fade-out"}`}>
+          <span className="white-text">{currentText.white}</span>
+          <span className="blue-text">{currentText.blue}</span>
         </span>
       </h1>
 
@@ -59,6 +61,7 @@ const PoliceHelpDesk = () => {
         />
       </div>
 
+      {/* Chatbot Icon */}
       <div className="chatbot-icon" onClick={openChatBot}>
         <i className="bi bi-robot"></i>
       </div>
