@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./homepage.css"; // Import the CSS file for styling
+import "./homepage.css";
 import logo from "./goapolice.png";
 
 const PoliceHelpDesk = () => {
   const [isBotOpen, setIsBotOpen] = useState(false);
 
   const openChatBot = () => {
-    setIsBotOpen(!isBotOpen); // Toggle chatbot visibility
+    setIsBotOpen(!isBotOpen);
   };
 
   return (
@@ -34,7 +34,7 @@ const PoliceHelpDesk = () => {
       </div>
 
       <div className="chatbot-icon" onClick={openChatBot}>
-        {/* Inline SVG icon */}
+        {}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
