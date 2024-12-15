@@ -64,7 +64,7 @@
   color: #555;
 }
 
-/* Favicon */
+/*<=====Favicon=====>*/
 head link[rel="icon"] {
-  content: url('./goapolice.png'); /* Update with actual favicon path */
+  content: url('./goapolice.png');
 }
