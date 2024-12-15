@@ -1,15 +1,15 @@
-/* Page Container */
+/*<=====Page Container====>*/
 .page-container {
-  background-color: #000; /* Background color */
+  background-color: #000;
   background-image: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.1) 1px,
     transparent 1px
-  ); /* Geometric grid pattern */
-  background-size: 20px 20px; /* Grid size */
-  background-attachment: fixed; /* Keeps background fixed */
+  );
+  background-size: 20px 20px;
+  background-attachment: fixed;
   color: #fff;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,24 +19,24 @@
   overflow: hidden;
 }
 
-/* Logo Styling */
+/*<=====Logo Styling=====>*/
 .logo {
-  width: 200px; /* Adjust logo size */
+  width: 200px;
   height: auto;
   margin-bottom: 20px;
 }
 
-/* Title Styling */
+/*<=====Title Styling=====>*/
 .title {
-  font-size: 3rem; /* Adjust title size */
+  font-size: 3rem;
   margin: 10px 0;
 }
 
 .highlight {
-  color: #0078ff; /* Highlight color */
+  color: #0078ff;
 }
 
-/* Subtitle */
+/*<=====Subtitle=====>*/
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 30px;
@@ -44,7 +44,7 @@
   text-align: center;
 }
 
-/* Input Fields */
+/*<=====Input Fields=====>*/
 .input-container {
   display: flex;
   gap: 20px;
@@ -61,7 +61,7 @@
 }
 
 .input-field::placeholder {
-  color: #555; /* Placeholder color */
+  color: #555;
 }
 
 /* Favicon */
