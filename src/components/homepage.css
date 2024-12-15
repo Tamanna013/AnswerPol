@@ -30,20 +30,33 @@
 .title {
   font-size: 3rem;
   margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   transition: opacity 0.5s ease-in-out;
 }
 
-.highlight {
+.white-text {
+  color: #ffffff;
+}
+
+.blue-text {
   color: #0078ff;
-  transition: opacity 0.5s ease-in-out;
+}
+
+.fade {
+  display: inline-block;
 }
 
 .fade-in {
   opacity: 1;
+  transition: opacity 0.5s ease-in;
 }
 
 .fade-out {
   opacity: 0;
+  transition: opacity 0.5s ease-out;
 }
 
 /*<=====Subtitle=====>*/
