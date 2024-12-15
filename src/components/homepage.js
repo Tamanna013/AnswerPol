@@ -1,16 +1,13 @@
 import React from "react";
 import "./homepage.css"; // Import the CSS file for styling
+import logo from "./goapolice.png";
 
 const PoliceHelpDesk = () => {
   return (
     <div className="page-container">
       {/* Logo Section */}
       <div className="logo-container">
-        <img
-          src="../assets/goapolice.png"
-          alt="Goa Police Logo"
-          className="logo"
-        />
+      <img src={logo} alt="Goa Police Logo" className="logo" />;
       </div>
 
       {/* Title Section */}
