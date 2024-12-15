@@ -1,16 +1,16 @@
 import React from "react";
-import "./homepage.css"; // Import the CSS file for styling
+import "./homepage.css";
 import logo from "./goapolice.png";
 
 const PoliceHelpDesk = () => {
   return (
     <div className="page-container">
-      {/* Logo Section */}
+      {}
       <div className="logo-container">
       <img src={logo} alt="Goa Police Logo" className="logo" />;
       </div>
 
-      {/* Title Section */}
+      {}
       <h1 className="title">
         Answer<span className="highlight">Pol</span>
       </h1>
@@ -18,7 +18,7 @@ const PoliceHelpDesk = () => {
         At your service ^^
       </p>
 
-      {/* Input Fields */}
+      {}
       <div className="input-container">
         <input
           type="text"
