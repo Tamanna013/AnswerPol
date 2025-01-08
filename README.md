@@ -37,3 +37,6 @@ Once the development server is running, you can access the app in your web brows
 ```bash
 http://localhost:3000
 ```
+
+### Screenshot:
+![Screenshot](./screenshot.png)
