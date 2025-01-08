@@ -32,6 +32,40 @@ const PoliceHelpDesk = () => {
 
   const currentText = textArray[currentTextIndex]; // Current text pair
 
+  useEffect(() => {
+    const myHeaders = new Headers();
+    myHeaders.append("x-apihub-key", "-1ulSV9UX8RkgdVdn6gC7r6kSRCVwbpGvkDkhhoVSIe-XUTsuF");
+    myHeaders.append("x-apihub-host", "Translate.allthingsdev.co");
+    myHeaders.append("x-apihub-endpoint", "c02831cf-422c-44a0-a1b5-2b319b277e94");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch("https://Translate.proxy-production.allthingsdev.co/languages", requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((result) => {
+        setLanguages(result); // Store the result in state
+      })
+      .catch((error) => {
+        setError(error.message); // Handle errors
+      });
+  }, []);
+
+  const Dropdown=()=>{
+    const [selectedOption, setSeletedOption]=useState("");
+    const handleChange=(event)=>{
+      setSelectedOption(event.target.value);
+    }
+  }
+
   return (
     <div className="page-container">
       <div className="logo-container">
@@ -40,7 +74,7 @@ const PoliceHelpDesk = () => {
 
       {/* Dynamic Heading */}
       <h1 className="title">
-        <span className={`fade ${fade ? "fade-in" : "fade-out"}`}>
+        <span className={fade ${fade ? "fade-in" : "fade-out"}}>
           <span className="white-text">{currentText.white}</span>
           <span className="blue-text">{currentText.blue}</span>
         </span>
@@ -54,12 +88,30 @@ const PoliceHelpDesk = () => {
           placeholder="Enter your query here"
           className="input-field"
         />
-        <input
-          type="text"
-          placeholder="Target Language"
-          className="input-field"
-        />
+        <label htmlFor="dropdown">Choose the target language: </label>
+        <select
+        id="dropdown"
+        value={selectedOption}
+        onChange={handleChange}
+        style={{padding:"5px", borderRadius: "4px"}}
+        >
+          <option value="" disabled>
+          choose your language
+          </option>
+         <option value="english">English</option>
+         <option value="hindi">Hindi</option>
+         <option value="Marathi">Marathi</option>
+         <option value="kannada">Kannada</option>
+         <option value="spanish">Spanish</option>
+         <option value="german">German</option>
+        </select>
+        {
+          selectedOption && (
+            <p style={{marginTop: "10px"}}>You selected: {selectedOption}</p>
+          )
+        }
       </div>
+          
 
       {/* Chatbot Icon */}
       <div className="chatbot-icon" onClick={openChatBot}>
@@ -79,5 +131,5 @@ const PoliceHelpDesk = () => {
     </div>
   );
 };
-
+export default Dropdown;
 export default PoliceHelpDesk;
