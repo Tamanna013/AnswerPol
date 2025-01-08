@@ -39,4 +39,4 @@ http://localhost:3000
 ```
 
 ### Screenshot:
-![Screenshot](./screenshot.png)
+![Screenshot](./Screenshot.png)
