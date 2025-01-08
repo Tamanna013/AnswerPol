@@ -6,6 +6,9 @@ const PoliceHelpDesk = () => {
   const [isBotOpen, setIsBotOpen] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [languages, setLanguages] = useState([]);
+  const [error, setError] = useState(null);
 
   // Array of text pairs (first part white, second part blue)
   const textArray = [
@@ -51,20 +54,13 @@ const PoliceHelpDesk = () => {
         }
         return response.json();
       })
-      .then((result) => {
-        setLanguages(result); // Store the result in state
-      })
-      .catch((error) => {
-        setError(error.message); // Handle errors
-      });
+      .then((result) => setLanguages(result))
+      .catch((error) => setError(error.message));
   }, []);
 
-  const Dropdown=()=>{
-    const [selectedOption, setSeletedOption]=useState("");
-    const handleChange=(event)=>{
-      setSelectedOption(event.target.value);
-    }
-  }
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <div className="page-container">
@@ -74,7 +70,7 @@ const PoliceHelpDesk = () => {
 
       {/* Dynamic Heading */}
       <h1 className="title">
-        <span className={fade ${fade ? "fade-in" : "fade-out"}}>
+        <span className={`${fade ? "fade-in" : "fade-out"}`}>
           <span className="white-text">{currentText.white}</span>
           <span className="blue-text">{currentText.blue}</span>
         </span>
@@ -90,28 +86,25 @@ const PoliceHelpDesk = () => {
         />
         <label htmlFor="dropdown">Choose the target language: </label>
         <select
-        id="dropdown"
-        value={selectedOption}
-        onChange={handleChange}
-        style={{padding:"5px", borderRadius: "4px"}}
+          id="dropdown"
+          value={selectedOption}
+          onChange={handleChange}
+          style={{ padding: "5px", borderRadius: "4px" }}
         >
           <option value="" disabled>
-          choose your language
+            Choose your language
           </option>
-         <option value="english">English</option>
-         <option value="hindi">Hindi</option>
-         <option value="Marathi">Marathi</option>
-         <option value="kannada">Kannada</option>
-         <option value="spanish">Spanish</option>
-         <option value="german">German</option>
+          {languages.map((language, index) => (
+            <option key={index} value={language}>
+              {language}
+            </option>
+          ))}
         </select>
-        {
-          selectedOption && (
-            <p style={{marginTop: "10px"}}>You selected: {selectedOption}</p>
-          )
-        }
+        {selectedOption && (
+          <p style={{ marginTop: "10px" }}>You selected: {selectedOption}</p>
+        )}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
       </div>
-          
 
       {/* Chatbot Icon */}
       <div className="chatbot-icon" onClick={openChatBot}>
@@ -131,5 +124,5 @@ const PoliceHelpDesk = () => {
     </div>
   );
 };
-export default Dropdown;
+
 export default PoliceHelpDesk;
