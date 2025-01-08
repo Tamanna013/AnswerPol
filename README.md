@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# AnswerPol
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+The **AnswerPol** is a React-based web application designed to assist users by providing translations and a chatbot feature. The application dynamically displays helpful messages and allows users to input queries in English, translating them into their preferred language.
 
-## Available Scripts
+## Features
+- **Dynamic Message Display**: The homepage features rotating messages with a fade effect.
+- **Translation**: Input your query and translate it into various languages using a translation API.
+- **Chatbot Integration**: A chatbot icon on the bottom-right provides additional support through an embedded iframe.
 
-In the project directory, you can run:
+## Installation and Setup
+Follow these steps to set up and run the project locally.
 
-### `npm start`
+### Prerequisites
+- Node.js and npm should be installed on your system. You can download them from [Node.js official website](https://nodejs.org/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/Tamanna013/AnswerPol.git
+cd answerpol
+```
+### Step 2: Install Dependencies
+Install the necessary dependencies by running:
+```bash
+npm install
+```
+### Step 3: Start the Development Server
+To start the React development server, use:
+```bash
+npm start
+```
+This will launch the app in your default web browser at http://localhost:3000.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Step 4: Access the Application
+Once the development server is running, you can access the app in your web browser at:
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+http://localhost:3000
+```
