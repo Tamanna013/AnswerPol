@@ -6,9 +6,9 @@ const PoliceHelpDesk = () => {
   const [isBotOpen, setIsBotOpen] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [fade, setFade] = useState(true);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [languages, setLanguages] = useState([]);
-  const [error, setError] = useState(null);
+  const [queryText, setQueryText] = useState(""); // State for the query text
+  const [translatedText, setTranslatedText] = useState(""); // State for the translated text
+  const [language, setLanguage] = useState("en"); // Default language is English
 
   // Array of text pairs (first part white, second part blue)
   const textArray = [
@@ -32,34 +32,44 @@ const PoliceHelpDesk = () => {
   }, []);
 
   const openChatBot = () => setIsBotOpen(!isBotOpen);
-
   const currentText = textArray[currentTextIndex]; // Current text pair
 
-  useEffect(() => {
-    const myHeaders = new Headers();
-    myHeaders.append("x-apihub-key", "-1ulSV9UX8RkgdVdn6gC7r6kSRCVwbpGvkDkhhoVSIe-XUTsuF");
-    myHeaders.append("x-apihub-host", "Translate.allthingsdev.co");
-    myHeaders.append("x-apihub-endpoint", "c02831cf-422c-44a0-a1b5-2b319b277e94");
+  // Function to handle input change and fetch translation using MyMemory API
+  const handleInputChange = (e) => {
+    const text = e.target.value;
+    setQueryText(text);
 
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+    if (text) {
+      // MyMemory API call for translation
+      const requestUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${language}`;
 
-    fetch("https://Translate.proxy-production.allthingsdev.co/languages", requestOptions)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((result) => setLanguages(result))
-      .catch((error) => setError(error.message));
-  }, []);
+      fetch(requestUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Translation Response:", data); // Debugging response
+          if (data && data.responseData) {
+            setTranslatedText(data.responseData.translatedText);
+          } else {
+            setTranslatedText("Translation failed. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setTranslatedText("Error translating text.");
+        });
+    } else {
+      setTranslatedText(""); // Clear translation if input is empty
+    }
+  };
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+  // Handle language change from dropdown
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+  };
+
+  // Function to trigger translation on button click
+  const handleTranslateClick = () => {
+    handleInputChange({ target: { value: queryText } }); // Trigger translation manually
   };
 
   return (
@@ -70,7 +80,7 @@ const PoliceHelpDesk = () => {
 
       {/* Dynamic Heading */}
       <h1 className="title">
-        <span className={`${fade ? "fade-in" : "fade-out"}`}>
+        <span className={`fade ${fade ? "fade-in" : "fade-out"}`}>
           <span className="white-text">{currentText.white}</span>
           <span className="blue-text">{currentText.blue}</span>
         </span>
@@ -83,27 +93,35 @@ const PoliceHelpDesk = () => {
           type="text"
           placeholder="Enter your query here"
           className="input-field"
+          value={queryText}
+          onChange={handleInputChange}
         />
-        <label htmlFor="dropdown">Choose the target language: </label>
-        <select
-          id="dropdown"
-          value={selectedOption}
-          onChange={handleChange}
-          style={{ padding: "5px", borderRadius: "4px" }}
-        >
-          <option value="" disabled>
-            Choose your language
-          </option>
-          {languages.map((language, index) => (
-            <option key={index} value={language}>
-              {language}
-            </option>
-          ))}
-        </select>
-        {selectedOption && (
-          <p style={{ marginTop: "10px" }}>You selected: {selectedOption}</p>
-        )}
-        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {/* Language Selection Dropdown */}
+        <div className="dropdown-container">
+          <select
+            value={language}
+            onChange={handleLanguageChange}
+            className="language-dropdown"
+          >
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="pt">Portuguese</option>
+            <option value="hi">Hindi</option>
+            <option value="zh">Chinese</option>
+            <option value="ar">Arabic</option>
+          </select>
+        </div>
+        
+        <input
+          type="text"
+          placeholder="Translation"
+          className="input-field"
+          value={translatedText}
+          readOnly
+        />
       </div>
 
       {/* Chatbot Icon */}
