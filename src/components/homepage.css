@@ -238,15 +238,8 @@ head link[rel="icon"] {
   color: #ffcc00;
 }
 
-
-
-
-
-
-/*<=====Changes added later=====>*/
-/* General Font Style */
 body, html {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* New font family */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
