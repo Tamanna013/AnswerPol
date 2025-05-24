@@ -1,52 +1,48 @@
 import React, { useState, useEffect } from "react";
-import "./homepage.css"; // Import the CSS file for styling
+import "./homepage.css"; 
 import logo from "./goapolice.png";
 
 const PoliceHelpDesk = () => {
   const [isBotOpen, setIsBotOpen] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [fade, setFade] = useState(true);
-  const [queryText, setQueryText] = useState(""); // State for the query text
-  const [translatedText, setTranslatedText] = useState(""); // State for the translated text
-  const [language, setLanguage] = useState("en"); // Default language is English
+  const [queryText, setQueryText] = useState(""); 
+  const [translatedText, setTranslatedText] = useState("");
+  const [language, setLanguage] = useState("en"); 
 
-  // Array of text pairs (first part white, second part blue)
   const textArray = [
     { white: "Answer", blue: "Pol" },
     { white: "#herefor", blue: "you" },
     { white: "#youare", blue: "priority" },
   ];
 
-  // Function to switch text with fade effect
   const switchText = () => {
-    setFade(false); // Start fade-out
+    setFade(false); 
     setTimeout(() => {
       setCurrentTextIndex((prevIndex) => (prevIndex + 1) % textArray.length);
-      setFade(true); // Start fade-in
+      setFade(true);
     }, 500);
   };
 
   useEffect(() => {
-    const interval = setInterval(switchText, 3000); // Switch text every 3 seconds
+    const interval = setInterval(switchText, 3000);
     return () => clearInterval(interval);
   }, []);
 
   const openChatBot = () => setIsBotOpen(!isBotOpen);
-  const currentText = textArray[currentTextIndex]; // Current text pair
+  const currentText = textArray[currentTextIndex]; 
 
-  // Function to handle input change and fetch translation using MyMemory API
   const handleInputChange = (e) => {
     const text = e.target.value;
     setQueryText(text);
 
     if (text) {
-      // MyMemory API call for translation
       const requestUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${language}`;
 
       fetch(requestUrl)
         .then((response) => response.json())
         .then((data) => {
-          console.log("Translation Response:", data); // Debugging response
+          console.log("Translation Response:", data); 
           if (data && data.responseData) {
             setTranslatedText(data.responseData.translatedText);
           } else {
@@ -58,18 +54,16 @@ const PoliceHelpDesk = () => {
           setTranslatedText("Error translating text.");
         });
     } else {
-      setTranslatedText(""); // Clear translation if input is empty
+      setTranslatedText(""); 
     }
   };
 
-  // Handle language change from dropdown
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
   };
 
-  // Function to trigger translation on button click
   const handleTranslateClick = () => {
-    handleInputChange({ target: { value: queryText } }); // Trigger translation manually
+    handleInputChange({ target: { value: queryText } }); 
   };
 
   return (
@@ -78,7 +72,6 @@ const PoliceHelpDesk = () => {
         <img src={logo} alt="Goa Police Logo" className="logo" />
       </div>
 
-      {/* Dynamic Heading */}
       <h1 className="title">
         <span className={`fade ${fade ? "fade-in" : "fade-out"}`}>
           <span className="white-text">{currentText.white}</span>
@@ -96,7 +89,6 @@ const PoliceHelpDesk = () => {
           value={queryText}
           onChange={handleInputChange}
         />
-        {/* Language Selection Dropdown */}
         <div className="dropdown-container">
           <select
             value={language}
@@ -124,7 +116,6 @@ const PoliceHelpDesk = () => {
         />
       </div>
 
-      {/* Chatbot Icon */}
       <div className="chatbot-icon" onClick={openChatBot}>
         <i className="bi bi-robot"></i>
       </div>
